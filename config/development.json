@@ -1,0 +1,20 @@
+{
+	"workerCount": 1,
+	"mailbox":{
+		"maxMessages": 100,
+		"dateFormat": "dddd, YYYY-MM-DD H:mm:ss",
+		"urlprefix": "http://disposebox.com"
+	},
+	"smtp":{
+		"domain": "disposebox.com",
+		"banner": "My Disposable E-mail service",
+		"port": 25,
+		"maxSize": 1048576
+	},
+	"mongo":{
+		"host": "localhost",
+        "name": "mailbox",
+		"collection": "messages",
+		"ttl": 3600
+	}
+}

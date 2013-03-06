@@ -1,0 +1,4 @@
+check process disposable with pidfile /var/run/disposable.pid
+   start program = "/etc/init.d/disposable start"
+   stop program = "/etc/init.d/disposable stop"
+   if 5 restarts within 5 cycles then timeout

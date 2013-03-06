@@ -1,0 +1,61 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          disposable_autostart
+# Required-Start:    $local_fs $remote_fs $network $syslog $netdaemons
+# Required-Stop:     $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: disposable
+# Description:       disposable
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NODE_PATH=/usr/local/lib/node_modules
+NODE=/usr/local/bin/node
+NAME=disposable
+USER="nobody"
+
+SOURCE="${BASH_SOURCE[0]}"
+DIR="$( dirname "$SOURCE" )"
+while [ -h "$SOURCE" ]
+do 
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+  DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd )"
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && cd .. && pwd )"
+
+if [ "$NODE_ENV" == "" ]; then
+  NODE_ENV=`cat $DIR/.node_env 2>/dev/null`
+fi
+
+if [ "$NODE_ENV" == "" ]; then
+  NODE_ENV=production
+fi
+
+test -x $NODE || exit 0
+
+function start_app {
+  echo "start"
+  sudo -u $USER NODE_ENV=$NODE_ENV nohup "$NODE" "$DIR/index.js" 1>>"/var/log/$NAME.log" 2>&1 &
+  echo $! > "/var/run/$NAME.pid"
+}
+
+function stop_app {
+  echo "stop"
+  kill `cat /var/run/$NAME.pid`
+}
+
+case $1 in
+  start)
+    start_app ;;
+  stop)
+    stop_app ;;
+  restart)
+    stop_app
+    start_app
+    ;;
+  *)
+    echo "usage: $NAME {start|stop}" ;;
+esac
+exit 0
