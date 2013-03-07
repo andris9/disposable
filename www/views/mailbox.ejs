@@ -1,0 +1,36 @@
+<h3><%= mailbox %></h3>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>Date</th>
+      <th>&nbsp;</th>
+      <th>Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  	<% if(!docs || !docs.length){%>
+  		<tr>
+  			<td colspan="4">
+  				No messages in this mailbox<br />
+				If anyone sends mail to <a href="mailto:<%= mailbox %>"><%= mailbox %></a> it will appear here
+			</td>
+  		</tr>
+  	<%}%>
+  	<% if(docs && docs.length){%>
+  		<% docs.forEach(function(row){%>
+
+	  		<tr>
+	  			<td><a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a></td>
+	  			<td><%= row.date.relative %></td>
+	  			<td><% if(!row.read){%><span class="icon-envelope"></span><%}%></td>
+	  			<td><a href="/message/<%= row.id %>"><strong><%= row.subject || "" %></strong></a></td>
+	  		</tr>
+
+  		<%})%>
+  	<%}%>
+
+  </tbody>
+</table>
