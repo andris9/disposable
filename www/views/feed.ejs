@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    >
+
+<channel>
+    <title><![CDATA[<%= mailbox %> feed at <%= title %>]]></title>
+    <atom:link href="http://<%= hostname %>/mailbox/<%= mailbox %>.rss" rel="self" type="application/rss+xml" />
+    <link><![CDATA[http://<%= hostname %>/mailbox/<%= mailbox %>]]></link>
+    <description><![CDATA[<%= hostname %> - hassle free disposable mailboxes]]></description>
+
+    <generator>http://<%= hostname %>/</generator>
+    <language>en</language>
+
+<% docs.forEach(function(doc){ %>
+
+    <item>
+        <guid isPermaLink="true"><![CDATA[http://<%= hostname %>/message/<%= doc._id %>]]></guid>
+        <title><![CDATA[<%= doc.subject %>]]></title>
+        <link><![CDATA[http://<%= hostname %>/message/<%= doc._id %>]]></link>
+        <pubDate><![CDATA[<%= doc.date.received %>]]></pubDate>
+        <author><![CDATA[<%- doc.envelope.from %>]]></author>
+        <content:encoded><![CDATA[<%- doc.html %>]]></content:encoded>
+    </item>
+
+<% }) %>
+
+</channel>
+</rss>
