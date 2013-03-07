@@ -1,9 +1,13 @@
 {
 	"workerCount": 1,
+	"port": 80,
+	"loggerInterface": "dev",
+	"hostname": "localhost",
+	"title": "Disposable",
 	"mailbox":{
 		"maxMessages": 100,
 		"dateFormat": "dddd, YYYY-MM-DD H:mm:ss",
-		"urlprefix": "http://disposebox.com"
+		"urlprefix": "http://localhost"
 	},
 	"smtp":{
 		"domain": "disposebox.com",

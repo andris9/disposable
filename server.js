@@ -11,7 +11,7 @@ api.initDB(function(err){
 
 	web.listen(listener.bind(this, "Web"));
 	smtp.listen(listener.bind(this, "SMTP"));
-	pop3.listen(listener.bind(this, "POP3"));	
+	pop3.listen(listener.bind(this, "POP3"));
 });
 
 function listener(service, error){
@@ -25,6 +25,7 @@ function listener(service, error){
 
 	if(ready == 3){
 		ready++;
+		console.log("All servers started, downgrading from root to nobody")
 		process.setgid("nogroup");
 		process.setuid("nobody");
 	}
