@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a> <span class="divider">/</span></li>
   <li><a href="/mailbox/<%- encodeURIComponent(doc.envelope.to) %>"><%= doc.envelope.to %></a> <span class="divider">/</span></li>
-  <li class="active">E-Mail</li>
+  <li class="active"><%= (doc.subject || "").length < 20 ? doc.subject || "[untitled]" : doc.subject.substr(0,20) + "..." %></li>
 </ul>
 
 <address>
