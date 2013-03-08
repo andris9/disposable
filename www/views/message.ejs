@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a> <span class="divider">/</span></li>
   <li><a href="/mailbox/<%- encodeURIComponent(doc.envelope.to) %>"><%= doc.envelope.to %></a> <span class="divider">/</span></li>
-  <li class="active"><%= (doc.subject || "").length < 20 ? doc.subject || "[untitled]" : doc.subject.substr(0,20) + "..." %></li>
+  <li class="active"><%= (doc.subject || "").length <= 40 ? doc.subject || "[untitled]" : doc.subject.substr(0,20) + "..." %></li>
 </ul>
 
 <address>
@@ -39,6 +39,7 @@
 <ul class="nav nav-tabs message-tabs">
       <li class="active"><a href="#message" data-toggle="tab">Message</a></li>
       <li><a href="#source" data-toggle="tab">Source</a></li>
+      <li><a href="#json" data-toggle="tab">JSON</a></li>
       <% if(doc.attachments && doc.attachments.length){%>
           <li><a href="#attachments" data-toggle="tab"><i class="icon-download-alt"></i> Attachments</a></li>
       <% } %>
@@ -54,6 +55,13 @@
           <div class="message-padding">
             <div>
                 <iframe src="http://<%= hostname %>/message/<%= doc.id %>/eml" class="seamless"></iframe>
+            </div>
+        </div>
+      </div>
+      <div class="tab-pane message-border" id="json">
+          <div class="message-padding">
+            <div>
+                <iframe src="http://<%= hostname %>/message/<%= doc.id %>/json" class="seamless"></iframe>
             </div>
         </div>
       </div>
