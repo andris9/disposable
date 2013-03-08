@@ -16,26 +16,7 @@
     <%}%>
 
     <div class="row">
-      <div class="span3">
-        <div class="well">
-          <p>Access <strong><%= mailbox %></strong> with:</p>
-
-          <h5>1. JSON</h5>
-          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
-
-          <h5>2. RSS</h5>
-          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
-
-          <h5>3. POP3</h5>
-          <p>To use POP3 access with your desktop e-mail client, use the following settings</p>
-          <ul>
-            <li>POP3 Server: <strong><%= hostname %></strong></li>
-            <li>Server port: <strong><%= pop3port %></strong></li>
-            <li>Username: <strong><%= mailbox %></strong></li>
-            <li>Password: <strong><%= mailbox %></strong></li>
-          </ul>
-        </div>
-      </div>
+      
       <div class="span9">
 
 <table class="table table-hover">
@@ -82,5 +63,25 @@
 
       </div>
     </div>
+    <div class="span3">
+        <div class="well">
+          <p>Access <strong><%= mailbox %></strong> with:</p>
+
+          <h5>1. JSON</h5>
+          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
+
+          <h5>2. RSS</h5>
+          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
+
+          <h5>3. POP3</h5>
+          <p>To use POP3 access with your desktop e-mail client, use the following settings</p>
+          <ul>
+            <li>POP3 Server: <strong><%= hostname %></strong></li>
+            <li>Server port: <strong><%= pop3port %></strong></li>
+            <li>Username: <strong><%= mailbox %></strong></li>
+            <li>Password: <strong><%= mailbox %></strong></li>
+          </ul>
+        </div>
+      </div>
   </div>
 </div>
