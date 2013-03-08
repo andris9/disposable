@@ -6,6 +6,23 @@ Web app for creating hassle free disposable mailboxes
 
 Demo running this app can be seen at [disposebox.com](http://disposebox.com)
 
+## Setup DNS
+
+Before you can receive any e-mails you need to set up at least on MX record for your domain.
+
+For example if you want to receive e-mails for `usename@example.com` and the hostname of the actual server where the SMTP daemon is running is `smtp.example.com` then you need to set up the following MX record:
+
+  * host: example.com
+  * priority: 10
+  * mx/hostname: smtp.example.com
+
+You can check if the record is correct with the `dig` command - be patient thouh when checking, since DNS propagation usually takes some time.
+
+    > dig MX example.com
+    ...
+    ;; ANSWER SECTION:
+    example.com.    3600    IN  MX  10 smtp.example.com.
+
 ## Installation
 
 ### Requiremenets
