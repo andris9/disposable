@@ -1,6 +1,6 @@
 # disposable
 
-Web app for creating hassle free disposable mailboxes
+Web app for creating your own hassle free disposable mailbox service like Mailinator or TrashMail.
 
 ## DEMO
 
