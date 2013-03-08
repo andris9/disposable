@@ -28,6 +28,6 @@
         "host": "localhost",
         "name": "mailbox",
         "collection": "messages",
-        "ttl": 3600
+        "ttl": 604800
     }
 }

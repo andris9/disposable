@@ -27,8 +27,8 @@ You can check if the record is correct with the `dig` command - be patient thouh
 
 ### Requiremenets
 
-  * **Node.js**
-  * **MongoDB**
+  * **Node.js** (min v0.8)
+  * **MongoDB** (min. v2.2)
 
 ### Install
 
