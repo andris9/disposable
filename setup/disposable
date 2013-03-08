@@ -13,7 +13,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 NODE_PATH=/usr/local/lib/node_modules
 NODE=/usr/local/bin/node
 NAME=disposable
-USER="nobody"
 
 SOURCE="${BASH_SOURCE[0]}"
 DIR="$( dirname "$SOURCE" )"
@@ -37,7 +36,7 @@ test -x $NODE || exit 0
 
 function start_app {
   echo "start"
-  sudo -u $USER NODE_ENV=$NODE_ENV nohup "$NODE" "$DIR/index.js" 1>>"/var/log/$NAME.log" 2>&1 &
+  NODE_ENV=$NODE_ENV nohup "$NODE" "$DIR/index.js" 1>>"/var/log/$NAME.log" 2>&1 &
   echo $! > "/var/run/$NAME.pid"
 }
 
