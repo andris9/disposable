@@ -17,7 +17,7 @@ Create hassle free disposable mailboxes
     npm install
     cp config/development.json config/production.json
 
-Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title`.
+Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title` and probably `loggerInterface` (set to ans empty string to get more conventional logging).
 
 ### Run
 
@@ -26,10 +26,26 @@ Edit the values in `config/production.json` - you probably want to keep everythi
 Or alternatively add an init script
 
     cd /etc/init.d
-    ln -s /path/to/disposable/setup/disposable
+    sudo ln -s /path/to/disposable/setup/disposable
     service disposable start
 
 **NB!** the app needs to be run as root - there are ports under 1000 to bind. Root privileges are released shortly after binding the ports though.
+
+You can also setup a monit script to ensure that the app keeps runnings
+
+    cd /path/to/monit/conf
+    sudo ln -s /path/to/disposable/setup/disposable.monit
+    sudo service monit restart
+
+To ensure that the app runs on reboot you can add it to boot list
+
+In CentOs
+
+    sudo chkconfig disposable on
+
+In Ubuntu
+
+    sudo update-rc.d disposable defaults
 
 ## DEMO
 
