@@ -26,7 +26,7 @@ function listener(service, error){
     if(ready == 3){
         ready++;
         console.log("All servers started, downgrading from root to nobody");
-        process.setgid("nogroup");
+        process.setgid("nobody");
         process.setuid("nobody");
     }
 }
