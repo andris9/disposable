@@ -40,7 +40,7 @@
       <li class="active"><a href="#message" data-toggle="tab">Message</a></li>
       <li><a href="#source" data-toggle="tab">Source</a></li>
       <% if(doc.attachments && doc.attachments.length){%>
-          <li><a href="#attachments" data-toggle="tab"><i class="icon-download-alt"></i> Attachments</a></li>
+          <li><a href="#attachments" data-toggle="tab"><i class="icon-download-alt"></i> Attachments (<%= doc.attachments.length %>)</a></li>
       <% } %>
 </ul><div class="tab-content">
       <div class="tab-pane active message-border" id="message">
