@@ -1,6 +1,10 @@
 # disposable
 
-Create hassle free disposable mailboxes
+Web app for creating hassle free disposable mailboxes
+
+## DEMO
+
+Demo running this app can be seen at [disposebox.com](http://disposebox.com)
 
 ## Installation
 
@@ -46,10 +50,6 @@ In CentOs
 In Ubuntu
 
     sudo update-rc.d disposable defaults
-
-## DEMO
-
-Demo running this app can be seen at [disposebox.com](http://disposebox.com)
 
 ## License
 
