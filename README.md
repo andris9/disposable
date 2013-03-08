@@ -8,7 +8,7 @@ Demo running this app can be seen at [disposebox.com](http://disposebox.com)
 
 ## Setup DNS
 
-Before you can receive any e-mails you need to set up at least on MX record for your domain.
+Before you can receive any e-mails you need to set up at least one MX record for your domain.
 
 For example if you want to receive e-mails for `usename@example.com` and the hostname of the actual server where the SMTP daemon is running is `smtp.example.com` then you need to set up the following MX record:
 
@@ -38,13 +38,15 @@ You can check if the record is correct with the `dig` command - be patient thouh
     npm install
     cp config/development.json config/production.json
 
-Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title` and probably `loggerInterface` (set to ans empty string to get more conventional logging).
+Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title` and probably `loggerInterface` (set to an empty string to get more conventional logging).
 
 ### Run
 
+To get all the logs on the console, run
+
     sudo NODE_ENV=production node index.js
 
-Or alternatively add an init script
+Or alternatively add an init script (you can tail the log file from /var/log/disposable.log)
 
     cd /etc/init.d
     sudo ln -s /path/to/disposable/setup/disposable
@@ -54,13 +56,13 @@ Or alternatively add an init script
 
 You can also setup a monit script to ensure that the app keeps runnings
 
-    cd /path/to/monit/conf
+    cd /path/to/monit/conf.d/
     sudo ln -s /path/to/disposable/setup/disposable.monit
     sudo service monit restart
 
-To ensure that the app runs on reboot you can add it to boot list
+To ensure that the app runs on reboot you can add it to startup list
 
-In CentOs
+In CentOS
 
     sudo chkconfig disposable on
 
