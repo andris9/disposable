@@ -14,6 +14,7 @@ Create hassle free disposable mailboxes
     cd /path/to/install
     git clone git://github.com/andris9/disposable.git
     cd disposable
+    npm install
     cp config/development.json config/production.json
 
 Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title`.
