@@ -6,6 +6,13 @@
 
 <address>
   <strong><a href="mailto:<%= doc.from && doc.from[0] && doc.from[0].address || doc.envelope.from %>"><%= doc.from && doc.from[0] && ((doc.from[0].name?doc.from[0].name+" ":"")+"<"+doc.from[0].address+">") || doc.envelope.from %></a></strong><br>
+  <% if(doc.replyTo && doc.replyTo.length){%>
+  Reply-To:
+      <% doc.replyTo.map(function(replyTo){%>
+          <%= (replyTo.name?replyTo.name+" ":"") + "<" + replyTo.address + ">" %>
+      <%}).join(", ")%>
+  <br>
+  <% } %>
   <% if(!doc.to || !doc.to.length){%>
   To: <%= "<"+doc.envelope.to+">"%><br>
   <% } %>
@@ -13,13 +20,6 @@
   To:
       <% doc.to.map(function(to){%>
           <%= (to.name?to.name+" ":"") + "<" + to.address + ">" %>
-      <%}).join(", ")%>
-  <br>
-  <% } %>
-  <% if(doc.replyTo && doc.replyTo.length){%>
-  Reply-To:
-      <% doc.replyTo.map(function(replyTo){%>
-          <%= (replyTo.name?replyTo.name+" ":"") + "<" + replyTo.address + ">" %>
       <%}).join(", ")%>
   <br>
   <% } %>
