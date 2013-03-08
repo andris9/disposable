@@ -64,7 +64,7 @@
       </div>
       <div class="span3">
         <div class="well">
-          <p>Access <strong><%= mailbox %></strong> with:</p>
+          <p>Access <strong><a href="mailto:<%= mailbox %>"><%= mailbox %></a></strong>:</p>
 
           <h5>1. JSON</h5>
           <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
