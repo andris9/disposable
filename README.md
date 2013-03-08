@@ -42,7 +42,7 @@ Edit the values in `config/production.json` - you probably want to keep everythi
 
 ### Run
 
-To get all the logs on the console, run
+Run from the console
 
     sudo NODE_ENV=production node index.js
 
