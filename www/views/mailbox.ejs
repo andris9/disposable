@@ -19,51 +19,50 @@
       
       <div class="span9">
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>From</th>
-      <th>Date</th>
-      <th>&nbsp;</th>
-      <th>Subject</th>
-    </tr>
-  </thead>
-  <tbody>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>Date</th>
+              <th>&nbsp;</th>
+              <th>Subject</th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <% if(!docs || !docs.length){%>
-          <tr>
-              <td colspan="4">
-                  No messages in this mailbox<br />
-                If anyone sends mail to <a href="mailto:<%= mailbox %>"><%= mailbox %></a> it will appear here
-            </td>
-          </tr>
-      <%}%>
-      <% if(docs && docs.length){%>
-          <% docs.forEach(function(row){%>
+              <% if(!docs || !docs.length){%>
+                  <tr>
+                      <td colspan="4">
+                          No messages in this mailbox<br />
+                        If anyone sends mail to <a href="mailto:<%= mailbox %>"><%= mailbox %></a> it will appear here
+                    </td>
+                  </tr>
+              <%}%>
+              <% if(docs && docs.length){%>
+                  <% docs.forEach(function(row){%>
 
-              <tr>
-                  <td><a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a></td>
-                  <td><%= row.date.relative %></td>
-                  <td>
-                    <% if(!row.read){%><i class="icon-envelope"></i><%}%>
-                    <% if(row.read){%><i class="icon-envelope icon-white"></i><%}%>
-                  </td>
-                  <td><a href="/message/<%= row.id %>">
-                    <% if(!row.read){%><strong><%}%>
-                    <%= row.subject || "[untitled message]" %>
-                    <% if(!row.read){%></strong><%}%>
-                    </a></td>
-              </tr>
+                      <tr>
+                          <td><a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a></td>
+                          <td><%= row.date.relative %></td>
+                          <td>
+                            <% if(!row.read){%><i class="icon-envelope"></i><%}%>
+                            <% if(row.read){%><i class="icon-envelope icon-white"></i><%}%>
+                          </td>
+                          <td><a href="/message/<%= row.id %>">
+                            <% if(!row.read){%><strong><%}%>
+                            <%= row.subject || "[untitled message]" %>
+                            <% if(!row.read){%></strong><%}%>
+                            </a></td>
+                      </tr>
 
-          <%})%>
-      <%}%>
+                  <%})%>
+              <%}%>
 
-  </tbody>
-</table>
+          </tbody>
+        </table>
 
       </div>
-    </div>
-    <div class="span3">
+      <div class="span3">
         <div class="well">
           <p>Access <strong><%= mailbox %></strong> with:</p>
 
@@ -83,5 +82,7 @@
           </ul>
         </div>
       </div>
+    </div>
+
   </div>
 </div>
