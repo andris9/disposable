@@ -16,25 +16,27 @@
     <%}%>
 
     <div class="row">
-      <div class="span3">
-        <p>Mailbox for <strong><%= mailbox %></strong> can be accessed with different means</p>
+      <div class="span4">
+        <div class="well">
+          <p>Mailbox for <strong><%= mailbox %></strong> can be accessed with different means</p>
 
-        <h4>1. JSON</h4>
-        <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
+          <h6>1. JSON</h6>
+          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
 
-        <h4>2. RSS</h4>
-        <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
+          <h6>2. RSS</h6>
+          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
 
-        <h4>3. POP3</h4>
-        <p>To use POP3 access with your desktop e-mail client, use the following settings</p>
-        <ul>
-          <li>POP3 Server: <strong><%= hostname %></strong></li>
-          <li>Server port: <strong><%= pop3port %></strong></li>
-          <li>Username: <strong><%= mailbox %></strong></li>
-          <li>Password: <strong><%= mailbox %></strong></li>
-        </ul>
+          <h6>3. POP3</h6>
+          <p>To use POP3 access with your desktop e-mail client, use the following settings</p>
+          <ul>
+            <li>POP3 Server: <strong><%= hostname %></strong></li>
+            <li>Server port: <strong><%= pop3port %></strong></li>
+            <li>Username: <strong><%= mailbox %></strong></li>
+            <li>Password: <strong><%= mailbox %></strong></li>
+          </ul>
+        </div>
       </div>
-      <div class="span6">
+      <div class="span8">
 
 <table class="table table-hover">
   <thead>
