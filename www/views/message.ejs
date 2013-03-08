@@ -19,7 +19,7 @@
   <% if(doc.replyTo && doc.replyTo.length){%>
   Reply-To:
       <% doc.replyTo.map(function(replyTo){%>
-          <%= (replyTo.name?to.name+" ":"") + "<" + replyTo.address + ">" %>
+          <%= (replyTo.name?replyTo.name+" ":"") + "<" + replyTo.address + ">" %>
       <%}).join(", ")%>
   <br>
   <% } %>
