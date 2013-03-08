@@ -1,4 +1,46 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>
+  <li class="active"><%= mailbox %></li>
+</ul>
+
 <h3><%= mailbox %></h3>
+
+<% if(message == "deleted"){%>
+  <div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Message deleted</strong>
+  </div>
+<%}%>
+
+<div class="accordion" id="accordion">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        Mailbox access information
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <p>Mailbox for <strong><%= mailbox %></strong> can be accessed with different means</p>
+
+        <h4>1. JSON</h4>
+        <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
+
+        <h4>2. RSS</h4>
+        <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
+
+        <h4>3. POP3</h4>
+        <p>To use POP3 access with your desktop e-mail client, use the following settings</p>
+        <ul>
+          <li>POP3 Server: <strong><%= hostname %></strong></li>
+          <li>Server port: <strong><%= pop3port %></strong></li>
+          <li>Username: <strong><%= mailbox %></strong></li>
+          <li>Password: <strong><%= mailbox %></strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <table class="table table-hover">
   <thead>
@@ -26,7 +68,7 @@
                   <td><a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a></td>
                   <td><%= row.date.relative %></td>
                   <td><% if(!row.read){%><span class="icon-envelope"></span><%}%></td>
-                  <td><a href="/message/<%= row.id %>"><strong><%= row.subject || "" %></strong></a></td>
+                  <td><a href="/message/<%= row.id %>"><strong><%= row.subject || "[untitled message]" %></strong></a></td>
               </tr>
 
           <%})%>

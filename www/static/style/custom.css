@@ -22,3 +22,30 @@
 .footer-links li:first-child {
   padding-left: 0;
 }
+
+/* Message
+-------------------------------------------------- */
+
+ul.message-tabs{
+  margin-bottom: 0;
+}
+
+div.message-border{
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+
+div.message-padding{
+    padding: 10px;
+    background: white
+}
+
+iframe.seamless{
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: auto;
+    width: 100%;
+    height: 600px;
+}
