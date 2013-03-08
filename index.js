@@ -4,9 +4,6 @@ var config = require("./config/" + (process.env.NODE_ENV || "development") + ".j
 
 if(cluster.isMaster){
 
-    // check if you need root rights
-    checkPrivilegedPorts();
-
     console.log("Starting Disposable server");
 
     // Fork workers.
@@ -40,34 +37,3 @@ process.on('uncaughtException', function(err) {
     console.log(err.stack);
     process.exit(1);
 });
-
-function checkPrivilegedPorts(){
-    var privilegedPorts = [];
-
-    if(config.smtp.port < 1000){
-        privilegedPorts.push(config.smtp.port);
-    }
-    if(config.web.port < 1000){
-        privilegedPorts.push(config.web.port);
-    }
-    if(config.pop3.port < 1000){
-        privilegedPorts.push(config.pop3.port);
-    }
-    if(!privilegedPorts.length){
-        return;
-    }
-
-    privilegedPorts.sort(function(a,b){
-        return a-b;
-    });
-
-    if(process.getgid() || process.getuid()){
-        console.log("");
-        console.log("Error starting the app");
-        console.log("======================");
-        console.log("You need to run this app as root user to be able to bind to ports " + privilegedPorts.join(", "));
-        console.log("Don't worry, root privileges are released shortly after binding");
-        console.log("");
-        process.exit(2);
-    }
-}
