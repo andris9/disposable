@@ -67,8 +67,15 @@
               <tr>
                   <td><a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a></td>
                   <td><%= row.date.relative %></td>
-                  <td><% if(!row.read){%><span class="icon-envelope"></span><%}%></td>
-                  <td><a href="/message/<%= row.id %>"><strong><%= row.subject || "[untitled message]" %></strong></a></td>
+                  <td>
+                    <% if(!row.read){%><i class="icon-envelope"></i><%}%>
+                    <% if(row.read){%><i class="icon-envelope icon-white"></i><%}%>
+                  </td>
+                  <td><a href="/message/<%= row.id %>">
+                    <% if(!row.read){%><strong><%}%>
+                    <%= row.subject || "[untitled message]" %>
+                    <% if(!row.read){%></strong><%}%>
+                    </a></td>
               </tr>
 
           <%})%>
