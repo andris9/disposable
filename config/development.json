@@ -1,22 +1,33 @@
 {
-	"workerCount": 1,
-	"port": 80,
-	"loggerInterface": "dev",
-	"hostname": "localhost",
-	"title": "Disposable",
-	"mailbox":{
-		"maxMessages": 100,
-		"dateFormat": "dddd, YYYY-MM-DD H:mm:ss"
-	},
-	"smtp":{
-		"banner": "My Disposable E-mail service",
-		"port": 25,
-		"maxSize": 1048576
-	},
-	"mongo":{
-		"host": "localhost",
+    "workerCount": 1,
+
+    "loggerInterface": "dev",
+    "hostname": "localhost",
+    "title": "Disposable",
+
+    "mailbox":{
+        "maxMessages": 100,
+        "dateFormat": "dddd, YYYY-MM-DD H:mm:ss"
+    },
+
+    "web":{
+        "port": 80
+    },
+
+    "smtp":{
+        "banner": "My Disposable E-mail service",
+        "port": 25,
+        "maxSize": 1048576
+    },
+
+    "pop3":{
+        "port": 110
+    },
+
+    "mongo":{
+        "host": "localhost",
         "name": "mailbox",
-		"collection": "messages",
-		"ttl": 3600
-	}
+        "collection": "messages",
+        "ttl": 3600
+    }
 }

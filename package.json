@@ -18,5 +18,8 @@
     "mailparser": "*",
     "mailpurify": "*",
     "pop3-n3": "*"
+  },
+  "scripts":{
+    "start": "node index.js"
   }
 }
