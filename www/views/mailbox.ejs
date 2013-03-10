@@ -15,6 +15,20 @@
       </div>
     <%}%>
 
+    <% if(message == "uploaded"){%>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Message uploaded</strong>
+      </div>
+    <%}%>
+
+    <% if(error){%>
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= error %>
+      </div>
+    <%}%>
+
     <div class="row">
       
       <div class="span9">
@@ -64,11 +78,12 @@
 
         <form method="post" enctype="multipart/form-data" action="/mailbox/<%- encodeURIComponent(mailbox)%>/upload">
             <fieldset>
-                <legend>Upload message source</legend>
-                <label>Select file</label>
-                <input type="file" name="eml" id="eml">
-                <span class="help-block">Upload an .eml file to this mailbox</span>
-                <button type="submit" class="btn">Upload</button>
+                <legend>Upload message</legend>
+                <span class="help-block">Here you can upload an .eml file to this mailbox as a received e-mail – good for testing purposes</span>
+
+                <p><input type="file" name="eml" id="eml"></p>
+
+                <p><button type="submit" class="btn">Upload message source</button></p>
             </fieldset>
         </form>
 
