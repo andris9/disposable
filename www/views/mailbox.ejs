@@ -61,6 +61,17 @@
           </tbody>
         </table>
 
+
+        <form method="post" enctype="multipart/form-data" action="/mailbox/<%- encodeURIComponent(mailbox)%>/upload">
+            <fieldset>
+                <legend>Upload message source</legend>
+                <label>Select file</label>
+                <input type="file" name="eml" id="eml">
+                <span class="help-block">Upload an .eml file to this mailbox</span>
+                <button type="submit" class="btn">Upload</button>
+            </fieldset>
+        </form>
+
       </div>
       <div class="span3">
         <div class="well">
