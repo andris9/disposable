@@ -38,6 +38,9 @@
 
 <ul class="nav nav-tabs message-tabs">
       <li class="active"><a href="#message" data-toggle="tab">Message</a></li>
+      <% if(doc.text){%>
+          <li><a href="#plaintext" data-toggle="tab">Plain text</a></li>
+      <% } %>
       <li><a href="#source" data-toggle="tab">Source</a></li>
       <% if(doc.attachments && doc.attachments.length){%>
           <li><a href="#attachments" data-toggle="tab"><i class="icon-download-alt"></i> Attachments (<%= doc.attachments.length %>)</a></li>
@@ -50,6 +53,15 @@
             </div>
         </div>
       </div>
+      <% if(doc.text){%>
+          <div class="tab-pane message-border" id="plaintext">
+              <div class="message-padding">
+                <div>
+                    <iframe src="http://<%= hostname %>/message/<%= doc.id %>/text" class="seamless"></iframe>
+                </div>
+            </div>
+          </div>
+      <% } %>
       <div class="tab-pane message-border" id="source">
           <div class="message-padding">
             <div>
