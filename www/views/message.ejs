@@ -1,77 +1,103 @@
 <ul class="breadcrumb">
-  <li><a href="/">Home</a> <span class="divider">/</span></li>
-  <li><a href="/mailbox/<%- encodeURIComponent(doc.envelope.to) %>"><%= doc.envelope.to %></a> <span class="divider">/</span></li>
-  <li class="active"><%= (doc.subject || "").length <= 40 ? doc.subject || "[untitled]" : doc.subject.substr(0,20) + "..." %></li>
+    <li>
+        <a href="/">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/mailbox/<%- encodeURIComponent(doc.envelope.to) %>"><%= doc.envelope.to %></a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        <%= (doc.subject || "").length <= 40 ? doc.subject || "[untitled]" : doc.subject.substr(0,20) + "..." %>
+    </li>
 </ul>
 
 <address>
-  <strong><a href="mailto:<%= doc.from && doc.from[0] && doc.from[0].address || doc.envelope.from %>"><%= doc.from && doc.from[0] && ((doc.from[0].name?doc.from[0].name+" ":"")+"<"+doc.from[0].address+">") || doc.envelope.from %></a></strong><br>
-  <% if(doc.replyTo && doc.replyTo.length){%>
-  Reply-To:
-      <% doc.replyTo.map(function(replyTo){%>
-          <%= (replyTo.name?replyTo.name+" ":"") + "<" + replyTo.address + ">" %>
-      <%}).join(", ")%>
-  <br>
-  <% } %>
-  <% if(!doc.to || !doc.to.length){%>
-  To: <%= "<"+doc.envelope.to+">"%><br>
-  <% } %>
-  <% if(doc.to && doc.to.length){%>
-  To:
-      <% doc.to.map(function(to){%>
-          <%= (to.name?to.name+" ":"") + "<" + to.address + ">" %>
-      <%}).join(", ")%>
-  <br>
-  <% } %>
-  <% if(doc.cc && doc.cc.length){%>
-  Cc:
-      <% doc.cc.map(function(cc){%>
-          <%= (cc.name?cc.name+" ":"") + "<" + cc.address + ">" %>
-      <%}).join(", ")%>
-  <br>
-  <% } %>
+
+    <strong><a href="mailto:<%= doc.from && doc.from[0] && doc.from[0].address || doc.envelope.from %>"><%= doc.from && doc.from[0] && ((doc.from[0].name?doc.from[0].name+" ":"")+"<"+doc.from[0].address+">") || doc.envelope.from %></a></strong><br>
+
+    <% if(doc.replyTo && doc.replyTo.length){%>
+        Reply-To:
+        <% doc.replyTo.map(function(replyTo){%>
+            <%= (replyTo.name?replyTo.name+" ":"") + "<" + replyTo.address + ">" %>
+        <%}).join(", ")%>
+        <br>
+    <% } %>
+
+    <% if(!doc.to || !doc.to.length){%>
+        To: <%= "<"+doc.envelope.to+">"%><br>
+    <% } %>
+
+    <% if(doc.to && doc.to.length){%>
+        To:
+        <% doc.to.map(function(to){%>
+            <%= (to.name?to.name+" ":"") + "<" + to.address + ">" %>
+        <%}).join(", ")%>
+        <br>
+    <% } %>
+
+    <% if(doc.cc && doc.cc.length){%>
+        Cc:
+        <% doc.cc.map(function(cc){%>
+            <%= (cc.name?cc.name+" ":"") + "<" + cc.address + ">" %>
+        <%}).join(", ")%>
+        <br>
+    <% } %>
+
 </address>
 
-    <button class="btn btn-danger pull-right" type="button" onclick="if(confirm('Are you sure?'))window.location.href='/delete/<%- encodeURIComponent(doc.envelope.to) %>/<%= doc.id %>'">Delete message</button>
-    <p class="lead"><%= doc.subject || "[untitled]"%></p>
+<button class="btn btn-danger pull-right" type="button" onclick="if(confirm('Are you sure?'))window.location.href='/delete/<%- encodeURIComponent(doc.envelope.to) %>/<%= doc.id %>'">Delete message</button>
 
+<p class="lead"><%= doc.subject || "[untitled]"%></p>
 
 <ul class="nav nav-tabs message-tabs">
-      <li class="active"><a href="#message" data-toggle="tab">Message</a></li>
-      <% if(doc.text){%>
-          <li><a href="#plaintext" data-toggle="tab">Plain text</a></li>
-      <% } %>
-      <li><a href="#source" data-toggle="tab">Source</a></li>
-      <% if(doc.attachments && doc.attachments.length){%>
-          <li><a href="#attachments" data-toggle="tab"><i class="icon-download-alt"></i> Attachments (<%= doc.attachments.length %>)</a></li>
-      <% } %>
-</ul><div class="tab-content">
-      <div class="tab-pane active message-border" id="message">
-          <div class="message-padding">
+    <li class="active">
+        <a href="#message" data-toggle="tab">Message</a>
+    </li>
+    <% if(doc.text){%>
+        <li>
+            <a href="#plaintext" data-toggle="tab">Plain text</a>
+        </li>
+    <% } %>
+    <li>
+        <a href="#source" data-toggle="tab">Source</a>
+    </li>
+    <% if(doc.attachments && doc.attachments.length){%>
+        <li>
+            <a href="#attachments" data-toggle="tab"><i class="icon-download-alt"></i> Attachments (<%= doc.attachments.length %>)</a>
+        </li>
+    <% } %>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane active message-border" id="message">
+        <div class="message-padding">
             <div>
                 <iframe src="http://<%= hostname %>/message/<%= doc.id %>/html" class="seamless"></iframe>
             </div>
         </div>
-      </div>
-      <% if(doc.text){%>
-          <div class="tab-pane message-border" id="plaintext">
-              <div class="message-padding">
+    </div>
+
+    <% if(doc.text){%>
+        <div class="tab-pane message-border" id="plaintext">
+            <div class="message-padding">
                 <div>
                     <iframe src="http://<%= hostname %>/message/<%= doc.id %>/text" class="seamless"></iframe>
                 </div>
             </div>
-          </div>
-      <% } %>
-      <div class="tab-pane message-border" id="source">
-          <div class="message-padding">
+        </div>
+    <% } %>
+
+    <div class="tab-pane message-border" id="source">
+        <div class="message-padding">
             <div>
                 <iframe src="http://<%= hostname %>/message/<%= doc.id %>/eml" class="seamless"></iframe>
             </div>
         </div>
-      </div>
-      <% if(doc.attachments && doc.attachments.length){%>
-          <div class="tab-pane message-border" id="attachments">
-              <div class="message-padding">
+    </div>
+
+    <% if(doc.attachments && doc.attachments.length){%>
+        <div class="tab-pane message-border" id="attachments">
+            <div class="message-padding">
                 <div>
                     <table class="table table-hover">
                         <thead>
@@ -86,19 +112,27 @@
                         <tbody>
                             <%doc.attachments.forEach(function(attachment, i){%>
                                 <tr>
-                                    <td><%= i+1 %></td>
-                                    <td><%= attachment.generatedFileName %></td>
-                                    <td><%= attachment.contentType %></td>
-                                    <td><%= attachment.length %> B</td>
-                                    <td><a class="btn btn-small" href="http://<%= hostname %>/attachment/<%= doc.id %>/<%= attachment.i %>/<%= attachment.generatedFileName %>" target="_blank"><i class="icon-download"></i> Download attachment</a>
+                                    <td>
+                                        <%= i+1 %>
+                                    </td>
+                                    <td>
+                                        <%= attachment.generatedFileName %>
+                                    </td>
+                                    <td>
+                                        <%= attachment.contentType %>
+                                    </td>
+                                    <td>
+                                        <%= attachment.length %> B
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-small" href="http://<%= hostname %>/attachment/<%= doc.id %>/<%= attachment.i %>/<%= attachment.generatedFileName %>" target="_blank"><i class="icon-download"></i> Download attachment</a>
                                     </td>
                                 </tr>
                             <%})%>
                         </tbody>
-
                     </table>
                 </div>
             </div>
-          </div>
-      <% } %>
+        </div>
+    <% } %>
 </div>

@@ -4,6 +4,7 @@ var api = require("./lib/api"),
     pop3 = require("./lib/pop3"),
     ready = 0;
 
+// Open DB connection and on success start listening to HTTP, POP3 and SMTP
 api.initDB(function(err){
     if(err){
         throw err;
@@ -14,6 +15,12 @@ api.initDB(function(err){
     pop3.listen(listener.bind(this, "POP3"));
 });
 
+/**
+ * Handles port binding callback.
+ *
+ * @param {String} service Indicator of which service was binded
+ * @param {Error} error Error object if binding failed
+ */
 function listener(service, error){
     if(error){
         console.log("Starting " + service + " server failed for the following error:");
@@ -23,6 +30,7 @@ function listener(service, error){
     console.log(service + " server started successfully");
     ready++;
 
+    // if all services are binded, release root privilieges
     if(ready == 3){
         ready++;
         console.log("All servers started, downgrading from root to nobody");

@@ -1,114 +1,119 @@
 <ul class="breadcrumb">
-  <li><a href="/">Home</a> <span class="divider">/</span></li>
-  <li class="active"><%= mailbox %></li>
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li class="active"><%= mailbox %></li>
 </ul>
 
 
 <div class="row">
-  <div class="span12">
-    <h3><%= mailbox %></h3>
+    <div class="span12">
+        <h3><%= mailbox %></h3>
 
-    <% if(message == "deleted"){%>
-      <div class="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Message deleted</strong>
-      </div>
-    <%}%>
+        <% if(message == "deleted"){%>
+            <div class="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Message deleted</strong>
+            </div>
+        <%}%>
 
-    <% if(message == "uploaded"){%>
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Message uploaded</strong>
-      </div>
-    <%}%>
+        <% if(message == "uploaded"){%>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Message uploaded</strong>
+            </div>
+        <%}%>
 
-    <% if(error){%>
-      <div class="alert alert-error">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= error %>
-      </div>
-    <%}%>
+        <% if(error){%>
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <%= error %>
+            </div>
+        <%}%>
 
-    <div class="row">
+        <div class="row">
 
-      <div class="span9">
+            <div class="span9">
 
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>From</th>
-              <th>Date</th>
-              <th>&nbsp;</th>
-              <th>Subject</th>
-            </tr>
-          </thead>
-          <tbody>
+                <table class="table table-hover">
 
-              <% if(!docs || !docs.length){%>
-                  <tr>
-                      <td colspan="4">
-                          No messages in this mailbox<br />
-                        If anyone sends mail to <a href="mailto:<%= mailbox %>"><%= mailbox %></a> it will appear here
-                    </td>
-                  </tr>
-              <%}%>
-              <% if(docs && docs.length){%>
-                  <% docs.forEach(function(row){%>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Date</th>
+                            <th>&nbsp;</th>
+                            <th>Subject</th>
+                        </tr>
+                    </thead>
 
-                      <tr>
-                          <td><a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a></td>
-                          <td><%= row.date.relative %></td>
-                          <td>
-                            <% if(!row.read){%><i class="icon-envelope"></i><%}%>
-                            <% if(row.read){%><i class="icon-envelope icon-white"></i><%}%>
-                          </td>
-                          <td><a href="/message/<%= row.id %>">
-                            <% if(!row.read){%><strong><%}%>
-                            <%= row.subject || "[untitled message]" %>
-                            <% if(!row.read){%></strong><%}%>
-                            </a></td>
-                      </tr>
+                    <tbody>
 
-                  <%})%>
-              <%}%>
+                        <% if(!docs || !docs.length){%>
+                            <tr>
+                                <td colspan="4">
+                                    No messages in this mailbox<br />
+                                    If anyone sends mail to <a href="mailto:<%= mailbox %>"><%= mailbox %></a> it will appear here
+                              </td>
+                            </tr>
+                        <%}%>
+                        <% if(docs && docs.length){%>
+                            <% docs.forEach(function(row){%>
+                                <tr>
+                                    <td>
+                                        <a href="mailto:<%= row.from && row.from[0] && row.from[0].address || row.envelope.from %>"><%= row.from && row.from[0] && ((row.from[0].name?row.from[0].name+" ":"")+"<"+row.from[0].address+">") || row.envelope.from %></a>
+                                    </td>
+                                    <td>
+                                        <%= row.date.relative %>
+                                    </td>
+                                    <td>
+                                        <% if(!row.read){%><i class="icon-envelope"></i><%}%>
+                                        <% if(row.read){%><i class="icon-envelope icon-white"></i><%}%>
+                                    </td>
+                                    <td><a href="/message/<%= row.id %>">
+                                        <% if(!row.read){%><strong><%}%>
+                                        <%= row.subject || "[untitled message]" %>
+                                        <% if(!row.read){%></strong><%}%>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <%})%>
+                        <%}%>
 
-          </tbody>
-        </table>
+                    </tbody>
+                </table>
 
 
-        <form method="post" enctype="multipart/form-data" action="/mailbox/<%- encodeURIComponent(mailbox)%>/upload">
-            <fieldset>
-                <legend>Upload message</legend>
-                <span class="help-block">Here you can upload an .eml file to this mailbox as a received e-mail – good for testing purposes</span>
+                <form method="post" enctype="multipart/form-data" action="/mailbox/<%- encodeURIComponent(mailbox)%>/upload">
+                    <fieldset>
+                        <legend>Upload message</legend>
+                        <span class="help-block">Here you can upload an .eml file to this mailbox as a received e-mail – good for testing purposes</span>
 
-                <p><input type="file" name="eml" id="eml"></p>
+                        <p><input type="file" name="eml" id="eml"></p>
 
-                <p><button type="submit" class="btn">Upload message source</button></p>
-            </fieldset>
-        </form>
+                        <p><button type="submit" class="btn">Upload message source</button></p>
+                    </fieldset>
+                </form>
 
-      </div>
-      <div class="span3">
-        <div class="well">
-          <p>Access <strong><a href="mailto:<%= mailbox %>"><%= mailbox %></a></strong>:</p>
+            </div>
 
-          <h5>1. JSON</h5>
-          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
+            <div class="span3">
+                <div class="well">
+                    <p>Access <strong><a href="mailto:<%= mailbox %>"><%= mailbox %></a></strong>:</p>
 
-          <h5>2. RSS</h5>
-          <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
+                    <h5>1. JSON</h5>
+                    <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/json" target="_blank">JSON link</a></p>
 
-          <h5>3. POP3 desktop client</h5>
-          <ul>
-            <li>Hostname: <strong><%= hostname %></strong></li>
-            <li>Port: <strong><%= pop3port %></strong></li>
-            <li>Username: <strong><%= mailbox %></strong></li>
-            <li>Password: <strong><%= mailbox %></strong></li>
-            <li>Secure: <strong>No</strong></li>
-          </ul>
+                    <h5>2. RSS</h5>
+                    <p><a href="/mailbox/<%- encodeURIComponent(mailbox)%>/rss" target="_blank">RSS link</a></p>
+
+                    <h5>3. POP3 desktop client</h5>
+                    <ul>
+                        <li>Hostname: <strong><%= hostname %></strong></li>
+                        <li>Port: <strong><%= pop3port %></strong></li>
+                        <li>Username: <strong><%= mailbox %></strong></li>
+                        <li>Password: <strong><%= mailbox %></strong></li>
+                        <li>Secure: <strong>No</strong></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-  </div>
 </div>
