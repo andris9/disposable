@@ -38,7 +38,11 @@ You can check if the record is correct with the `dig` command - be patient thoug
     npm install
     cp config/development.json config/production.json
 
-Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title` and probably `loggerInterface` (set to an empty string to get more conventional logging).
+Edit the values in `config/production.json` - you probably want to keep everything except `hostname` and `title` and probably `loggerInterface` (set to an empty string to get more conventional logging, see all available options for the logger [here](http://www.senchalabs.org/connect/logger.html)).
+
+### Pre run
+
+Check that nothing is already using port 25. Usually there might me a sendmail daemon or such already installed. Try to connect to localhost port 25 and if you receive an answer uninstall or kill the task that is using this port.
 
 ### Run
 
